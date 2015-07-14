@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+			function myFunc() {
+				// need to put var otherwise capOne will be global
+				var capOne = "What's in your wallet?";
+			}
+			myFunc();
+
+
+			console.log(window["capOne"]);
+
+
+
+
+		</script>
+	</body>
+
+</html>

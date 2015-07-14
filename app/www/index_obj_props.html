@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+			var b = {
+				Minion: {
+					name: "Bob"
+				}
+			};
+
+			var c = Object.create(b);
+			c.Minion.name = "Kevin"
+
+			console.dir(b.Minion.name);
+			console.dir(c);
+
+
+		</script>
+	</body>
+
+</html>

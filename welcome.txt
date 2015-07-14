@@ -1,0 +1,14 @@
+Welcome to jQuery!
+
+Instructor: Eric Greene
+
+Schedule:
+
+Monday through Thursday 9am to 5pm
+
+Breaks:
+	Morning: 10:30am to 10:45am
+	Lunch: Noon to 1pm
+	Afternoon: 3:00pm to 3:15pm
+
+Class Introductions...

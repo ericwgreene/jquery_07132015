@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+			function Person() {
+				this.firstName = "";
+				this.lastName = "";
+			}
+
+			Person.prototype.getFullName = function() {
+				return this.firstName + " " + this.lastName;
+			};
+
+			function Employee() {
+				Employee.prototype._super.call(this);
+			}
+
+			Employee.prototype = Object.create(Person.prototype);
+			Employee.prototype.constructor = Employee;
+			Employee.prototype._super = Person;
+			Employee.prototype.getRecordTitle = function() {
+				return this.empId + " " + this.firstName + " " + this.lastName;
+			};
+
+			Employee.extend = function() {
+
+				function ChildObject() {
+					ChildObject.prototype._super.call(this);
+				}
+
+				ChildObject.prototype = Object.create(Employee.prototype);
+				ChildObject.prototype.constructor = ChildObject;
+				ChildObject.prototype._super = Employee;
+
+				return ChildObject;
+			};
+
+			var CapOneEmp = Employee.extend();
+
+			var c = new CapOneEmp();
+			c.empId = 1;
+			c.firstName = "Eric";
+			c.lastName = "Greene";
+			console.log(c.getRecordTitle());
+			console.log(c.getFullName());
+			console.dir(c);
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+			function myFunc(a, b) {
+
+
+
+					console.dir(this);
+					console.log("a:" + a);
+					console.log("b:" + b);
+					console.dir(arguments);
+			}
+
+			myFunc.bestCreditCardCompanyInTheWorld = "Capital One";
+
+			myFunc.$inject = ["$scope"]
+
+			var o = {
+				id: 1,
+				myFunc: myFunc
+			};
+
+			myFunc(1,2);
+			o.myFunc();
+			myFunc.call({ id: 2});
+			o.myFunc.call({ id: 2}, 3, 4, 5, 6);
+
+			var myArgs = [5, 6, 7];
+
+			myFunc.apply({ id: 2}, myArgs);
+
+			var fn = myFunc.bind({ id: 3});
+			fn();
+			//fn.call({id:4}, 8, 9);
+
+		</script>
+	</body>
+
+</html>

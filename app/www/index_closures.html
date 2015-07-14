@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+
+
+			var outerFn = function() {
+
+				var x = 3;
+
+				return function() {
+					console.log(x);
+				};
+
+			};
+
+			var innerFn = outerFn();
+			innerFn();
+			var innerFn2 = outerFn();
+			innerFn2();
+
+		</script>
+	</body>
+
+</html>

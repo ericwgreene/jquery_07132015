@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<script src="js/capone.js"></script>
+	</head>
+
+	<body>
+		<script>
+
+			var BankAccount = CapOne.Model.extend({
+				defaults: {
+					accountNumber: "0000000",
+					accountBalance: 0
+				},
+				getAccountNumber: function() {
+					return this.attributes["accountNumber"];
+				}
+			});
+
+			var CheckingAccount = BankAccount.extend({
+				defaults: {
+					accountNumber: "CHK000000"
+				},
+				getLastCheckNumber: function() {
+				}
+			});
+
+			var SavingsAccount = BankAccount.extend({
+				getLastDepositAmt: function() {
+				}
+			});
+
+			var BankAccounts  = CapOne.Collection.extend();
+			var accounts = new BankAccounts();
+
+			accounts.add(new CheckingAccount({
+				accountNumber: "CHK000002",
+				accountBalance: 100
+			}));
+
+			accounts.add(new SavingsAccount({
+				accountNumber: "SVG000004",
+				accountBalance: 400
+			}));
+
+			accounts.forEach(function(account) {
+				console.log(account.getAccountNumber());
+			});
+
+
+		</script>
+	</body>
+
+</html>

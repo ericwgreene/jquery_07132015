@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<script>
+
+			var x = [1,2,3];
+			x.push(4);
+			x.pop();
+			x.shift();
+			x.unshift();
+			x[67] = "Here is some cool text!";
+			x[1000] = 34;
+			x.someProp = "This is cool!";
+			console.log(x["someProp"]);
+
+			console.dir(x);
+
+			for (var t=0; t<100; t++) {
+				console.log(x[t]);
+			}
+
+			for (var prop in x) {
+				console.log(prop + "=" + x[prop]);
+			}
+
+			var y = {};
+			y[2] = "Hi Class!";
+			console.dir(y);
+
+
+
+
+		</script>
+	</body>
+
+</html>
