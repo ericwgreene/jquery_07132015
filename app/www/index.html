@@ -8,7 +8,7 @@
 	</head>
 
 	<body>
-
+		<header></header>
 		<table>
 			<thead>
 				<tr>
@@ -29,6 +29,10 @@
 
 			$(function() {
 
+				$("header").html("<h1>Welcome Class!</h1>");
+				//$("header").text("<h1>Welcome Class!</h1>");
+
+				var originalValues;
 				var countries = [
 					{ name: "Iran", capital: "Tehran", colors: ["green","white","red"] },
 					{ name: "India", capital: "New Delhi", colors: ["green","white","saffron"] },
@@ -40,6 +44,69 @@
 
 				var tBody = $("tbody");
 
+				function viewRow(trElement, cancel) {
+
+					trElement.find("td").each(function(index, element) {
+
+						if (index < 3) {
+
+							var value;
+							if (cancel) {
+								value = originalValues[index];
+							} else {
+								value = $(element).find("input").val();
+							}
+							$(element).empty().text(value);
+
+						} else {
+
+							var editButton = $("<button>Edit</button>");
+							editButton.on("click", function(e) {
+								editRow(trElement);
+							});
+
+							$(element).empty().append(editButton);
+
+						}
+
+					});
+
+				}
+
+				function editRow(trElement) {
+
+					originalValues = [];
+
+					trElement.find("td").each(function(index, element) {
+
+						if (index < 3) {
+
+							var value = $(element).text();
+
+							originalValues[index] = value;
+
+							$(element).empty().append($("<input>").val(value));
+
+						} else {
+
+							var saveButton = $("<button>Save</button>");
+							saveButton.on("click", function(e) {
+								viewRow($(e.target).closest("tr"));
+							});
+
+							var cancelButton = $("<button>Cancel</button>");
+							cancelButton.on("click", function(e) {
+								viewRow($(e.target).closest("tr"), true);
+							});
+
+							$(element).empty().append(saveButton).append(cancelButton);
+
+						}
+
+					});
+
+				}
+
 				countries.forEach(function(country, index) {
 
 					var tdName = $("<td></td>");
@@ -49,13 +116,7 @@
 					var editButton = $("<button>Edit</button>");
 
 					editButton.on("click", function(e) {
-
-						$(e.target).closest("tr").find("td:lt(3)").each(function(index, element) {
-
-							var value = $(element).text();
-							$(element).empty().append($("<input value='" + value + "'>"));
-
-						});
+						editRow($(e.target).closest("tr"));
 					});
 
 					tdAction.append(editButton);
