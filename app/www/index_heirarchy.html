@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="div-1">
+			<ul>
+				<li>Div 1 - Item 1</li>
+				<li>Div 1 - Item 2</li>
+				<li>Div 1 - Item 3</li>
+				<li>Div 1 - Item 4</li>
+			</ul>
+		</div>
+		<div id="div-2">
+			<ul>
+				<li>Div 2 - Item 1</li>
+				<li>Div 2 - Item 2</li>
+				<li>Div 2 - Item 3</li>
+				<li>Div 2 - Item 4</li>
+			</ul>
+		</div>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			$(function() {
+
+				// descendant selector
+				var selector = "#div-2 li";
+				// next sibiling selector
+				var selector = "#div-2 > ul > li + li";
+				// all sibiling
+				var selector = "#div-2 > ul > li ~ li";
+
+				console.dir($(selector));
+
+				console.dir(document.querySelectorAll(selector));
+
+			});
+
+		</script>
+	</body>
+
+</html>

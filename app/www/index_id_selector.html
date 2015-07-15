@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+
+			#div2 {
+				border: 3px solid green;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		<div id="div1">Div One!</div>
+		<div id="div2">Div Two!</div>
+		<div id="div3">Divya Three!</div>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			$(function() {
+
+				// jquery
+				console.dir($("#div2").text());
+
+				// older browser api
+				console.dir(document.getElementById("div2").textContent);
+
+				// css selector engine
+				console.dir(document.querySelectorAll("#div2"));
+
+			});
+
+		</script>
+	</body>
+
+</html>

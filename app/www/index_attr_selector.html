@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<div id="div-1">
+			<ul>
+				<li active>Div 1 - Item 1</li>
+				<li status="not default">Div 1 - Item 2</li>
+				<li status="not default">Div 1 - Item 3</li>
+				<li type="divItem">Div 1 - Item 4</li>
+			</ul>
+		</div>
+		<div id="div-2">
+			<ul>
+				<li name='item1' type="divItem" status="item-not-active">Div 2 - Item 1</li>
+				<li name='item2' type="divItem">Div 2 - Item 2</li>
+				<li active name='item3' type="divItem">Div 2 - Item 3</li>
+				<li name='item4' type="divItem">Div 2 - Item 4</li>
+			</ul>
+		</div>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			$(function() {
+
+				// has active attribute
+				// var selector = "[active]";
+
+				// has attribute equal to
+				//var selector = "[name='item3']";
+
+				// attribute starts with
+				//var selector = "[name^='item']";
+
+				// attribute ends with
+				//var selector = "[type$='Item']";
+
+				// attribute hyphen delimited
+				//var selector = "[status|='not']";
+
+				// attribute space delimited
+				//var selector = "[status~='not']";
+
+				// attribute contains
+				//var selector = "[status*='not']";
+
+				console.dir($(selector));
+
+				console.dir(document.querySelectorAll(selector));
+
+			});
+
+		</script>
+	</body>
+
+</html>

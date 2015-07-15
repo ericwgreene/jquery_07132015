@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<style>
+
+			div {
+				border: 3px solid green;
+			}
+
+			.newbie.female {
+				font-weight:bold;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+		<div id="div1" class="newbie male">Venkat One!</div>
+		<div id="div2">Div Two!</div>
+		<div id="div3" class="newbie female">Divya Three!</div>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			$(function() {
+
+				console.dir($("div.newbie.female"));
+
+				console.dir(document.getElementsByClassName("newbie"));
+
+				console.dir(document.querySelectorAll("div.newbie.female"));
+
+			});
+
+		</script>
+	</body>
+
+</html>

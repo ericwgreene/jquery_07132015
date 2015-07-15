@@ -1,21 +1,19 @@
 {
-  "name": "jquery_07132015",
+  "name": "capitalone",
   "version": "0.0.0",
-  "homepage": "https://github.com/ericwgreene/jquery_07132015",
   "authors": [
     "Eric W. Greene <eric@training4developers.com>"
   ],
-  "license": "MIT",
+  "license": "Apache 2.0",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "app/www/libs",
+    "www/libs",
     "test",
     "tests"
   ],
   "dependencies": {
-    "handlebars": "~3.0.3",
     "jquery": "~2.1.4"
   }
 }
