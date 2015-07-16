@@ -5,41 +5,103 @@
 	<head>
 		<title>Welcome to jQuery!</title>
 		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script src="libs/angular/angular.js"></script>
 	</head>
 
 	<body>
-
-		<div id="myView">
-
-			<button id="button1">Button 1</button>
-			<button id="button2">Button 2</button>
-			<button id="button3">Button 3</button>
-
+		<div ng-app="MyApp">
+			<div ng-controller="MyCtrl">
+				<ul>
+					<li ng-repeat="color in colors">{{color}}</li>
+				</ul>
+			</div>
+			<div ng-controller="MyCtrl">
+				<div>
+					<h1>Here is my company list</h1>
+					<div co-repeat="company in companies | orderBy:'rating':true">{{company.name}}</div>
+					<span>These views do not necessarily represent the views of Capital One.</span>
+				</div>
+			</div>
 		</div>
 
-
-
-		<script src="libs/jquery/dist/jquery.js"></script>
 		<script>
 
-		$(function() {
+			angular.module("MyApp", [])
+				.directive("coRepeat", function($compile) {
 
-			$("#button1").on("click", function(e) {
-				console.log("button1 clicked!");
-				e.preventDefault();
-			});
+					return {
+						restrict: "A",
+						priority: 1000,
+						compile: function(tElement, tAttrs) {
 
-			$("#button1").on("click", function(e) {
-				console.log("button1 clicked 2!");
-			});
+							var tokens = tElement.attr("co-repeat").split(" in ");
+							var item = tokens[0];
+							var list = tokens[1];
+							var pri = this.priority;
 
-			$("#myView").on("click", "button", function(e) {
-				//console.dir(e);
-				console.log("button clicked");
-			});
+							var placeHolder = document
+								.createComment("coRepeat: " +
+									tElement.attr("co-repeat"));
 
-		});
+							var parentElement = tElement.parent();
+							tElement.replaceWith(placeHolder);
 
+							var tpl = tElement[0].outerHTML;
+
+							return function(scope, element, attrs) {
+
+
+								var startingElement = placeHolder;
+								scope.$eval(list).forEach(function(thing) {
+
+									scope.$destroy();
+
+									var childScope = scope.$new();
+									childScope[item] = thing;
+
+									var linkingFn = $compile(tpl, null, pri);
+									var domElements = linkingFn(childScope);
+									//parentElement.append(domElements);
+
+									$(startingElement).after(domElements);
+									startingElement = domElements;
+
+									element.find("button").on("click", function() {
+										scope.$apply(function() {
+											scope.title = "New Value";
+										});
+									});
+
+									scope.$on("$destroy", function() {
+
+										element.find("button").off("click");
+
+									});
+
+								});
+
+							};
+
+						}
+
+
+					};
+
+				})
+				.controller("MyCtrl", function($scope) {
+
+					$scope.colors = ["red","orange","blue","yellow"];
+					$scope.shapes = ["rectangle","circle","triangle","square"];
+
+					$scope.companies = [
+						{ name: "Capital One", rating: 10 },
+						{ name: "American Express", rating: 1},
+						{ name: "Chase", rating: 7 },
+						{ name: "Citibank", rating: 4 }
+					];
+
+				});
 
 		</script>
 	</body>

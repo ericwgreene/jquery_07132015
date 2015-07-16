@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+		$(function() {
+
+			// POST request
+			/*
+			$.ajax({
+				url: "/svc/widgets",
+				type: "POST",
+				data: JSON.stringify({
+					name: "New Widget",
+					description: "A new widget",
+					color: "yellow",
+					size: "tiny",
+					quantity: 50
+				}),
+				contentType: "application/json"
+			}).then(function(result, status, xhr) {
+				console.log("success");
+				console.dir(result);
+			}, function(xhr, message, error) {
+				console.log("fail");
+				console.dir(arguments);
+			});
+			*/
+
+			// PUT
+			$.ajax({
+				url: "/svc/widgets/5",
+				type: "PUT",
+				headers: {
+				 "AUTHORIZATION": "My Key"
+				},
+				data: JSON.stringify({
+					widgetId: 5,
+					name: "New Widget",
+					description: "A new widget",
+					color: "yellow",
+					size: "tiny",
+					quantity: 50
+				}),
+				contentType: "application/json"
+			}).then(function(result, status, xhr) {
+				console.log("success");
+				console.dir(result);
+			}, function(xhr, message, error) {
+				console.log("fail");
+				console.dir(arguments);
+			});
+
+			// DELETE
+			/*
+			$.ajax({
+				url: "/svc/widgets/5",
+				type: "DELETE"
+			}).then(function(result, status, xhr) {
+				console.log("success");
+				console.dir(result);
+			}, function(xhr, message, error) {
+				console.log("fail");
+				console.dir(arguments);
+			});
+			*/
+
+		});
+
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+		$(function() {
+
+			var widgetId = 2;
+
+			$.ajax({
+				url: "/svc/widgets",
+				type: "GET"
+			}).then(function(result, status, xhr) {
+				console.log("success");
+				console.dir(result);
+			}, function(xhr, message, error) {
+				console.log("fail");
+				console.dir(arguments);
+			});
+
+			$.ajax({
+				url: "/svc/widgets/" + encodeURIComponent(widgetId),
+				type: "GET"
+			}).then(function(result, status, xhr) {
+				console.log("success");
+				console.dir(result);
+			}, function(xhr, message, error) {
+				console.log("fail");
+				console.dir(arguments);
+			});
+
+
+		});
+
+
+		</script>
+	</body>
+
+</html>

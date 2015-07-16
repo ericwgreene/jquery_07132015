@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<div id="myView">
+
+			<ul id="message">
+			</ul>
+
+			<button id="button1">Button 1</button>
+			<button id="button2">Button 2</button>
+			<button id="button3">Button 3</button>
+
+		</div>
+
+
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+		$(function() {
+
+			$("#button1").on("click", function(e) {
+				console.log("button1 clicked!");
+				$("#message").append("<li>Hi Class!</li>");
+			});
+
+			$("#button1").on("click", function(e) {
+				console.log("button1 clicked 2!");
+			});
+
+			$("#myView").on("click", "button", function(e) {
+				//console.dir(e);
+				console.log("button clicked");
+			});
+
+		});
+
+
+		</script>
+	</body>
+
+</html>
