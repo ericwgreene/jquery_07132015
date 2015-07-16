@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+
+		<div>some data</div>
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			(function($) {
+
+				$.fn.makeBold = function(options) {
+
+					var settings = $.extend({}, $.fn.makeBold.defaults, options);
+
+					return this.each(function(index, element) {
+						$(element).css("font-weight", "bold");
+					});
+
+				};
+
+				$.fn.makeBold.defaults = {};
+
+			})(jQuery);
+
+
+
+
+			$(function() {
+
+				console.dir($("div"));
+
+				$("div").makeBold();
+
+			});
+
+		</script>
+	</body>
+
+</html>

@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+		<title>Welcome to jQuery!</title>
+		<link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+	</head>
+
+	<body>
+		<header></header>
+		<table>
+			<thead>
+				<tr>
+						<th>Name</th>
+						<th>Capital</th>
+						<th>Colors</th>
+						<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+
+
+		<script src="libs/jquery/dist/jquery.js"></script>
+		<script>
+
+			$(function() {
+
+				$("header").html("<h1>Welcome Class!</h1>");
+				//$("header").text("<h1>Welcome Class!</h1>");
+
+				var countries = [
+					{ name: "Iran", capital: "Tehran", colors: ["green","white","red"] },
+					{ name: "India", capital: "New Delhi", colors: ["green","white","saffron"] },
+					{ name: "United States", capital: "Washington", colors: ["red","white","blue"] },
+					{ name: "China", capital: "Beijing", colors: ["red","yellow"] },
+					{ name: "United Kingdom", capital: "London", colors: ["red","white","blue"] },
+					{ name: "Ecuador", capital: "Quito", colors: ["red","blue","yellow"] },
+				]
+
+				var tBody = $("tbody");
+
+				function removeButtonEventHandler(td) {
+					td.find("button").each(function(index, element) {
+						$(element).off("click");
+					});
+					return td;
+				}
+
+				function viewRow(trElement, cancel) {
+
+					trElement.find("td").each(function(index, element) {
+
+						var td = $(element);
+
+						if (index < 3) {
+
+							var value;
+							if (cancel) {
+								value = td.attr("original");
+							} else {
+								value = td.find("input").val();
+							}
+							td.empty().text(value);
+
+						} else {
+
+							var button = document.createElement("button");
+							button.innerHTML = "Edit";
+
+							var editButton = $("<button>Edit</button>");
+							editButton.on("click", function(e) {
+
+								// option 1 - closure
+								//editRow(trElement);
+								// option 2 - local variable and DOM traveral
+								editRow($(e.target).parent().parent());
+							});
+
+							removeButtonEventHandler(td).empty().append(editButton);
+
+						}
+
+					});
+
+				}
+
+				function editRow(trElement) {
+
+					originalValues = [];
+
+					trElement.find("td").each(function(index, element) {
+
+						var td = $(element);
+
+						if (index < 3) {
+
+							var value = td.text();
+							td.attr("original", value);
+							td.empty().append($("<input>").val(value));
+
+						} else {
+
+							var saveButton = $("<button>Save</button>");
+							saveButton.on("click", function(e) {
+								viewRow($(e.target).closest("tr"));
+							});
+
+							var cancelButton = $("<button>Cancel</button>");
+							cancelButton.on("click", function(e) {
+								viewRow($(e.target).closest("tr"), true);
+							});
+
+							removeButtonEventHandler(td)
+								.empty().append(saveButton).append(cancelButton);
+
+						}
+
+					});
+
+				}
+
+				countries.forEach(function(country, index) {
+
+					var tdName = $("<td></td>");
+					var tdCapital = $("<td></td>");
+					var tdColors = $("<td></td>");
+					var tdAction = $("<td></td>");
+					var editButton = $("<button>Edit</button>");
+
+					editButton.on("click", function(e) {
+						editRow($(e.target).closest("tr"));
+					});
+
+					tdAction.append(editButton);
+
+					tdName.text(country.name);
+					tdCapital.text(country.capital);
+					tdColors.text(country.colors.join(", "));
+
+					var trCountry = $("<tr></tr>");
+					trCountry.append(tdName).append(tdCapital)
+						.append(tdColors).append(tdAction);
+
+					tBody.append(trCountry);
+
+				});
+
+			});
+
+		</script>
+	</body>
+
+</html>
