@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+
+<html>
+
+   <head>
+      <title>Welcome to jQuery!</title>
+      <link rel="shortcut icon" href="data:image/x-icon;," type="image/x-icon">
+      <!--
+      <style>
+         div {
+            border : 3px solid green;
+         }
+         .newbie{
+            font-weight:bold;
+         }
+      </style>
+      -->
+   </head>
+
+   <body>
+
+
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.js"></script>
+   <!--
+   <div id="div1">Div one</div>
+   <div id="div2">Div two</div>
+   <div id="div3" class="newbie">Div three</div>
+   <div id="div22">
+      <ui>
+         <li>1</li>
+         <li>2</li>
+      </ui>
+   </div>
+   <div id="div23">
+      <ui>
+         <li>3</li>
+         <li>4</li>
+      </ui>
+   </div>
+   -->
+   <div id="app">
+
+   </div>
+
+   <table id="country">
+      <thead>
+
+      <tr>
+         <th>Name</th>
+         <th>Capital</th>
+         <th>Colors</th>
+         <th>Action</th>
+      </tr>
+      </thead>
+
+
+      <tbody>
+
+      </tbody>
+   </table>
+   <script>
+
+      $(document).ready(function(){
+         //console.log("do something");
+      });
+
+      $(function() {
+
+
+         var countries= [
+            {name : "Iran", capital :"Tehran",colors:["green","white","red"]},
+            {name : "India", capital :"New Dehli",colors:["green","white","safaran"]},
+            {name : "USA",capital:"Washington, DC",colors:["red","white","blue"]},
+            {name : "China",capital:"Beijing",colors:["red","yellow"]}
+         ];
+
+
+
+         var tbody=$("tbody");
+
+         function removeEventHandler(td)
+         {
+            td.find("button").each(function(index,element){
+               $(element).off("click");
+            });
+            return td;
+         }
+
+         function editAction(trEdit) {
+
+            var editTable= trEdit.closest("table");
+            if (editTable.prop("currentEditRow"))
+            {
+               console.dir(editTable[0]);
+               editToView(editTable.prop("currentEditRow"),"cancel");
+            }
+            editTable.prop("currentEditRow", trEdit);
+            console.dir(trEdit.find("td"));
+            trEdit.find("td").each(function(index,element){
+               var td = $(element);
+               if (index===3) {
+                  var acceptButton = $("<button>accept</button>");
+                  var cancelButton = $("<button>cancel</button>");
+                  td.empty().append(acceptButton).append(cancelButton);
+                 acceptButton.on("click",function(e) {
+                     var trRow = $(e.target).closest("tr");
+                     editToView(trRow,"accept");
+                  });
+
+                  cancelButton.on("click",function(e) {
+                     var trRow = $(e.target).closest("tr");
+                     editToView(trRow,"cancel");
+                  });
+
+               }
+               else {
+                  td.attr("old-value",td.text());
+                  var input = $("<input>");
+                  input.val(td.text());
+                  removeEventHandler(td).empty().append($(input));
+
+               }
+
+            });
+         }
+
+         function editToView (trRow,flag){
+            var value;
+            trRow.find("td").each(function(index,element) {
+               var td = $(element);
+               if (index < 3) {
+                  if (flag==="accept")
+                  {
+                     value = td.find("input").val();
+                  }
+                  else if (flag==="cancel")
+                  {
+                     value = td.attr("old-value");
+                  } else
+                  {
+                     throw Error("Invliad Edit To View Flag!");
+                  }
+                  td.empty();
+                  td.text(value);
+               } else
+               {
+                  var editButton = $("<button>edit</button>");
+                  removeEventHandler(td).empty().append(editButton);
+                  editButton.on("click",function(e){
+                     var trRow = $(e.target).closest("tr");
+                     editAction(trRow);
+                  });
+
+               }
+            });
+         }
+         countries.forEach(function(country,index){
+
+            var tdName = $("<td></td>");
+            var tdCapital = $("<td></td>");
+            var tdColor = $("<td></td>");
+            var tdAction = $("<td></td>");
+            var editButton = $("<button>edit</button>");
+            editButton.on("click",function(e){
+               var trRow = $(e.target).closest("tr");
+               editAction(trRow);
+            });
+
+            tdName.text(country.name);
+            tdCapital.text(country.capital);
+            tdColor.text(country.colors.join((", ")));
+
+            tdAction.append(editButton);
+
+
+            var trCountry = $("<tr></tr>");
+
+            trCountry.append(tdName).append(tdCapital).append(tdColor).append(tdAction);
+            tbody.append(trCountry)
+
+
+         });
+
+
+      });
+//       var selector = "#div22 > ui > li";
+//       console.dir($(selector));
+
+//       console.dir(document.querySelectorAll(selector));
+
+
+         /*class selector*/
+         // Jquery
+         //console.dir($(".newbie"));
+
+         // Selector using the web API
+         //console.dir(document.getElementsByClassName("newbie"));
+
+         // css selector engine
+         //console.dir(document.querySelectorAll(".newbiew"));
+
+
+         /* Selector by tag*/
+
+         // Selector using by tag only
+         //console.log($("div").html());
+
+         // Selector using the web API
+         //console.log(document.getElementsByTagName("div"));
+
+         // css selector engine
+         //console.log(document.querySelectorAll("div"));
+
+
+         /* Selector by name*/
+
+         // Selector by ID using through the JQueryu
+      // console.log($("#div2").html());
+
+         // Selector using the web API
+      // console.log(document.getElementById("div2").textContent);
+      // console.log("do something without document ready");
+
+         // css selector engine
+      // console.log(document.querySelectorAll("#div2"));
+
+
+
+      // do the samething as the document ready
+      // This is happens in IE8 and above and it is the way that is has impleneted in the document ready
+      window.document.addEventListener("DOMContentLoaded",function(){
+         //console.log("do something add event");
+      })
+
+      // This is the way works for older IE
+      window.load = function(){
+      // console.log("do something in the load");
+      }
+
+
+
+   </script>
+   </body>
+
+</html>
